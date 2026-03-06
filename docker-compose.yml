@@ -17,6 +17,7 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
+    
   
   frontend:
     image: aeyzaguirre/frontend-ecommerce:latest
@@ -67,6 +68,18 @@ services:
     depends_on:
       db:
         condition: service_healthy
+
+  scanner:
+    image: ghcr.io/aquasecurity/trivy:0.44.0
+    volumes:
+      - ./scan-reports:/reports
+      - /var/run/docker.sock:/var/run/docker.sock
+    entrypoint: ["/bin/sh", "-c"]
+    command: >
+      "trivy image --output /reports/db.json --format json aeyzaguirre/database-ecommerce:latest &&
+       trivy image --output /reports/frontend.json --format json aeyzaguirre/frontend-ecommerce:latest &&
+       trivy image --output /reports/products.json --format json aeyzaguirre/products-ecommerce:latest &&
+       trivy image --output /reports/orders.json --format json aeyzaguirre/orders-ecommerce:latest"
 
 networks:
   ecomm-net:
