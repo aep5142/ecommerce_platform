@@ -1,0 +1,74 @@
+services:
+  db:
+    image: aeyzaguirre/database-ecommerce:latest
+    container_name: database
+    networks:
+      - ecomm-net
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+    environment:
+      - DB_HOST=db
+      - DB_USER=postgres
+      - DB_PASSWORD=password
+      - DB_NAME=ecommerce
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+  
+  frontend:
+    image: aeyzaguirre/frontend-ecommerce:latest
+    container_name: frontend
+    networks:
+      - ecomm-net
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+      products:
+        condition: service_started
+      orders:
+        condition: service_started
+
+  products:
+    image: aeyzaguirre/products-ecommerce:latest
+    container_name: products
+    networks:
+      - ecomm-net
+    ports:
+      - "3001:3001"
+    restart: unless-stopped
+    environment:
+      - DB_HOST=db
+      - DB_USER=postgres
+      - DB_PASSWORD=password
+      - DB_NAME=ecommerce
+    depends_on:
+      db:
+        condition: service_healthy
+
+  orders: 
+    image: aeyzaguirre/orders-ecommerce:latest
+    container_name: orders
+    networks:
+      - ecomm-net
+    ports:
+      - "3002:3002"
+    restart: unless-stopped
+    environment:
+      - DB_HOST=db
+      - DB_USER=postgres
+      - DB_PASSWORD=password
+      - DB_NAME=ecommerce
+    depends_on:
+      db:
+        condition: service_healthy
+
+networks:
+  ecomm-net:
+    driver: bridge
+
