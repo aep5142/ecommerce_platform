@@ -1,2 +1,196 @@
 <!DOCTYPE html>
 
+<style>
+    table {
+  border-collapse: collapse;
+  border: 1px solid rgb(140 140 140);
+  font-family: sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+    }
+
+    thead th,
+    thead td {
+    background-color: rgb(228 240 245);
+    font-weight: bold;
+    border: 1px solid rgb(140 140 140);
+    }
+
+    tbody th,
+    tbody td,
+    tfoot th,
+    tfoot td {
+    border: 1px solid rgb(160 160 160);
+    padding: 8px 10px;
+    font-weight: normal;
+    }
+
+    img {
+        border: 1px solid gray
+    }
+</style>
+
+<body>
+    
+    <h2>
+        Phase 1: Repository Setup and Version Control:
+    </h2>
+
+    <ul>
+        <li>
+            <b>Four properly structured Git repositories:</b>
+            <br>
+            The first one is the orchestratinng repo, and the following four are the requested ones.
+            <br>
+            <img src="screenshots/ph1_1.png" width="1000">
+            <br>
+            <a href="https://github.com/aep5142/database-ecommerce">Database Repo</a>
+            <br>
+            <a href="https://github.com/aep5142/orders-ecommerce">Orders Repo</a>
+            <br>
+            <a href="https://github.com/aep5142/products-ecommerce">Products Repo</a>
+            <br>
+            <a href="https://github.com/aep5142/frontend-ecommerce">Front-End Repo</a>
+            <br>
+            <br>
+            Where Each repository of the four services has this same structure:
+            <br>
+            <img src="screenshots/ph1_2.png" width="1000">
+            <br>
+            <br>
+        </li>
+        <li>
+            <b>Documentation explaining your Git workflow and branching strategy:</b>
+            <br>
+            Each repo inside <code>docs/</code> has it's own. md file with the branching strategy.
+            <br>
+            <img src="screenshots/ph1_3.png" width="1000">
+            <br>
+            <br>
+        </li>
+        <li>
+            <b>Initial setup of main and develop branches:</b>
+            <br>
+            When starting, each repo has two branches: <code>main</code> and <code>develop</code>
+            <br>
+            <img src="screenshots/ph1_4.png" width="1000">
+            <br>
+            <br>
+        </li>
+        <li>
+            <b>Complete feature development workflow (from branch creation to merge):</b>
+            <br>
+            <img src="screenshots/ph1_5.png" width="1000">
+            <br>
+            <img src="screenshots/ph1_6.png" width="1000">
+            <br>
+            <img src="screenshots/ph1_7.png" width="1000">
+            <br>
+            <br>
+        </li>
+        <li>
+            <b>Complete release workflow (from develop to main):</b>
+            <br>
+            <img src="screenshots/ph1_8.png" width="1000">
+            <br>
+            <br>
+        </li>
+        <li>
+            <b>Complete hotfix workflow (from main back to main and develop):</b>
+            <br>
+            <img src="screenshots/ph1_9.png" width="1000">
+            <br>
+            <br>
+        </li>
+        <li>
+            <b>How all branch types interact in the Git Flow model:<b>
+            <br>
+            Basically, I followed the git flow model from Vincent Driessen.
+            <br>
+            <img src="screenshots/ph1_10.png" width="1000">
+            <br>
+            <br>
+        </li>
+
+        
+    </ul>
+    <br>
+    <br>
+    <h2>
+        Phase 2: Containerization with Docker
+    </h2>
+
+    <ul>
+        <li>
+            <b>Dockerfiles for all services:</b>
+            <br>
+            Each repository has it's own dockerfile. These are:
+            <br>
+            <a href="https://github.com/aep5142/database-ecommerce/blob/develop/Dockerfile">Database Dockerfile</a>
+            <br>
+            <a href="https://github.com/aep5142/orders-ecommerce/blob/develop/Dockerfile">Orders Dockerfile</a>
+            <br>
+            <a href="https://github.com/aep5142/products-ecommerce/blob/develop/Dockerfile">Products Dockerfile</a>
+            <br>
+            <a href="https://github.com/aep5142/frontend-ecommerce/blob/develop/Dockerfile">Front-End Dockerfile</a>
+            <br>
+            <br>
+        </li>
+        <li>
+            <b>Docker Compose configuration:</b>
+            <br>
+            <a href="https://github.com/aep5142/ecommerce_platform/blob/main/docker-compose.yml">Docker Compose in Orchestration repo</a>
+            <br>
+            <br>
+        </li>
+        <li>
+            <b>Container security scan reports:</b>
+            <br>
+            <a href="https://github.com/aep5142/ecommerce_platform/blob/main/docker-compose.yml">Docker Compose in Orchestration repo</a>
+            <br>
+            <br>
+        </li>
+    </ul>
+    
+
+    <h2>
+        Question 4: Canary Deployment
+    </h2>
+
+    <h3>
+        <li>For the last part of rebalancing load, I used Copilot to try to debug it, but it always showed 80/20 relation, even when I patched it.</li>
+    </h3>
+    <ul>
+        <li>
+            Showing stable deployment running
+            <br>
+            <img src="screenshots/01-stable-deployment.png" width="1000">
+            <br>
+            <br>
+            Showing both stable and canary running
+            <br>
+            <img src="screenshots/02-canary-deployment.png" width="1000">
+            <br>
+            <br>
+            Describe showing initial traffic split
+            <br>
+            <img src="screenshots/03-traffic-split-20-80.png" width="1000">
+            <br>
+            <br>
+            Multiple curl requests showing ~20% going to canary
+            <br>
+            <img src="screenshots/04-traffic-test.png" width="1000">
+            <br>
+            <br>
+            After promotion showing 50/50 traffic split
+            <br>
+            <img src="screenshots/05-promotion-50-50.png" width="1000">
+            <br>
+            <br>
+            Final state with 100% traffic to canary
+            <br>
+            <img src="screenshots/06-promotion-100.png" width="1000">
+        </li>
+    </ul>
+</body>
+
