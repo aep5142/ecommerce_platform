@@ -187,45 +187,45 @@
         </li>
     </ul>
     
-
     <h2>
-        Question 4: Canary Deployment
+        Phase 3: Phase 3: CI/CD Pipeline with Jenkins
     </h2>
-
-    <h3>
-        <li>For the last part of rebalancing load, I used Copilot to try to debug it, but it always showed 80/20 relation, even when I patched it.</li>
-    </h3>
     <ul>
         <li>
-            Showing stable deployment running
+            <b>Screenshots of Jenkins server with pipelines configured:</b>
             <br>
-            <img src="screenshots/01-stable-deployment.png" width="1000">
-            <br>
-            <br>
-            Showing both stable and canary running
-            <br>
-            <img src="screenshots/02-canary-deployment.png" width="1000">
+            <img src="screenshots/ph3_1.png" width="1000">
             <br>
             <br>
-            Describe showing initial traffic split
-            <br>
-            <img src="screenshots/03-traffic-split-20-80.png" width="1000">
-            <br>
-            <br>
-            Multiple curl requests showing ~20% going to canary
-            <br>
-            <img src="screenshots/04-traffic-test.png" width="1000">
-            <br>
-            <br>
-            After promotion showing 50/50 traffic split
-            <br>
-            <img src="screenshots/05-promotion-50-50.png" width="1000">
-            <br>
-            <br>
-            Final state with 100% traffic to canary
-            <br>
-            <img src="screenshots/06-promotion-100.png" width="1000">
         </li>
+        <li>
+            <b>Jenkinsfiles for all services:</b>
+            <br>
+            <br>
+            <a href="https://hub.docker.com/repository/docker/aeyzaguirre/database-ecommerce/general">Database Image</a>
+            <br>
+            <a href="https://hub.docker.com/repository/docker/aeyzaguirre/orders-ecommerce/general">Orders Image</a>
+            <br>
+            <a href="https://hub.docker.com/repository/docker/aeyzaguirre/products-ecommerce/general">Products Image</a>
+            <br>
+            <a href="https://hub.docker.com/repository/docker/aeyzaguirre/frontend-ecommerce/general">Front-End Image</a>
+            <br>
+            <br>
+        </li>
+        <li>
+            <b>Screenshots of pipeline executions for each environment (Build, Dev, Staging, Prod):</b>
+            <br>
+            <img src="screenshots/ph3_2.png" width="1000">
+            <img src="screenshots/ph3_2.png" width="1000">
+            <br>
+            <br>
+        </li>
+        
     </ul>
-</body>
+
+    <ul>
+
+    </ul>
+
+    </body>
 
