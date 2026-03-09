@@ -1,0 +1,28 @@
+# Terraform provider plugins and lock file
+.terraform/
+.terraform.lock.hcl
+
+# State files — contain sensitive data (passwords, certificates).
+# BACKUP PROCEDURE:
+#   1. Copy state/terraform.tfstate.d/ to a secure location (encrypted USB, private S3 bucket)
+#   2. Run: tar -czf terraform-state-backup-$(date +%Y%m%d).tar.gz state/
+#   3. Store backup OUTSIDE the git repository
+state/terraform.tfstate
+state/terraform.tfstate.d/
+state/terraform.tfstate.backup
+*.tfstate
+*.tfstate.backup
+*.tfstate.lock.info
+
+# Saved plan files (contain full resource configs — keep local only)
+*.tfplan
+
+# Override files (local developer overrides — not for VCS)
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Crash logs
+crash.log
+crash.*.log
