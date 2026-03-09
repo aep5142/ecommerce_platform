@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ecommerce-config
+  namespace: staging
+data:
+  DB_HOST: "database"
+  DB_NAME: "ecommerce"
+  DB_PORT: "5432"
